@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    // Sentry
+    "sourceMap": true,
+    "outDir": "dist",
+    // Set `sourceRoot` to  "/" to strip the build path prefix,
+    // from generated source code references.,
+    // This improves issue grouping in Sentry.,
+    "sourceRoot": "/",
+    "types": ["@cloudflare/workers-types"]
+  }
+}

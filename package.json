@@ -1,0 +1,14 @@
+{
+  "name": "sam",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20231218.0",
+    "better-sqlite3": "9.2.2",
+    "tsx": "4.0.0",
+    "vitest": "1.1.2"
+  }
+}
