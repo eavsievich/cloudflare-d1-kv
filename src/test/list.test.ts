@@ -83,7 +83,6 @@ describe("list tests", () => {
       limit: 3,
       offset: 0,
     });
-    console.log(result);
     expect(result[0].value).toStrictEqual(0);
     expect(result[1].value).toStrictEqual(10);
     expect(result[2].value).toStrictEqual(11);
@@ -96,7 +95,6 @@ describe("list tests", () => {
       limit: 3,
       offset: 1,
     });
-    console.log(result);
     expect(result[0].value).toStrictEqual(10);
     expect(result[1].value).toStrictEqual(11);
     expect(result[2].value).toStrictEqual(12);
@@ -110,9 +108,68 @@ describe("list tests", () => {
       offset: 0,
       order: "desc",
     });
-    console.log(result);
     expect(result[0].value).toStrictEqual(9);
     expect(result[1].value).toStrictEqual(99);
     expect(result[2].value).toStrictEqual(98);
+  });
+
+  test("list sort by created_at works", async () => {
+    const timeFunction = createTimeFunction(0);
+    const kv = provideTestKv(timeFunction);
+
+    for (let i = 0; i < 100; i++) {
+      timeFunction.mockImplementation(() => i);
+      await kv.set(["foo", i], i);
+    }
+
+    // Sort asc
+    const resultAsc = await kv.list({
+      prefix: ["foo"],
+      limit: 1,
+      offset: 0,
+      sortTrait: "created_at",
+      order: "asc",
+    });
+    expect(resultAsc[0].value).toStrictEqual(0);
+
+    // Sort desc
+    const resultDesc = await kv.list({
+      prefix: ["foo"],
+      limit: 1,
+      offset: 0,
+      sortTrait: "created_at",
+      order: "desc",
+    });
+    expect(resultDesc[0].value).toStrictEqual(99);
+  });
+
+  test("list sort by updated_at works", async () => {
+    const timeFunction = createTimeFunction(0);
+    const kv = provideTestKv(timeFunction);
+
+    for (let i = 0; i < 100; i++) {
+      timeFunction.mockImplementation(() => i);
+      await kv.set(["foo", i], i);
+    }
+
+    // Sort asc
+    const resultAsc = await kv.list({
+      prefix: ["foo"],
+      limit: 1,
+      offset: 0,
+      sortTrait: "updated_at",
+      order: "asc",
+    });
+    expect(resultAsc[0].value).toStrictEqual(0);
+
+    // Sort desc
+    const resultDesc = await kv.list({
+      prefix: ["foo"],
+      limit: 1,
+      offset: 0,
+      sortTrait: "updated_at",
+      order: "desc",
+    });
+    expect(resultDesc[0].value).toStrictEqual(99);
   });
 });
