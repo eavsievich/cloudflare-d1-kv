@@ -10,3 +10,4 @@ lib
 build
 .vercel
 .wrangler
+dist

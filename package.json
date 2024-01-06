@@ -1,14 +1,19 @@
 {
-  "name": "sam",
-  "version": "1.0.0",
+  "name": "d1-kv",
+  "version": "1.0.3",
+  "description": "Simple key-value storage on top of Cloudflare D1",
   "scripts": {
     "dev": "tsx src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "publish": "rm -r dist && tsc && npm publish"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@cloudflare/workers-types": "4.20231218.0",
     "better-sqlite3": "9.2.2",
     "tsx": "4.0.0",
-    "vitest": "1.1.2"
+    "vitest": "1.1.2",
+    "typescript": "5.3.3"
   }
 }

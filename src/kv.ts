@@ -114,7 +114,7 @@ export class Kv {
     private tableName: string,
     private readonly db: KvBackend,
     private readonly clearExpiredThreshold: number = 0.1,
-    private readonly currentTimeProvider: () => number = currentTimeMs,
+    private readonly currentTimeProvider: () => number = currentTimeSeconds,
   ) {
   }
 
@@ -214,8 +214,8 @@ function unwrapKey(key: string) {
   return JSON.parse(key) as KvKey;
 }
 
-function currentTimeMs() {
-  return new Date().getTime();
+function currentTimeSeconds() {
+  return Math.floor(new Date().getTime() / 1000);
 }
 
 function transformResult<T>(packedKey: string, kvRawResult: KvRawResult | null): KvResult<T> {
